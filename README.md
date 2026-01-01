@@ -1,5 +1,5 @@
 # raylib-2D-pixel-game
-
+```text
 MyRPG_Game/
 ├── .gitignore             # File cấu hình Git (bỏ qua folder build)
 ├── CMakeLists.txt         # File cấu hình build chính
@@ -17,3 +17,4 @@ MyRPG_Game/
     ├── entities/          # Các đối tượng game (Player, Enemy, NPC)
     ├── scenes/            # Quản lý màn chơi (Menu, Gameplay, GameOver)
     └── utils/             # Các hàm tiện ích (Toán học, hằng số)
+```
