@@ -8,6 +8,14 @@ Game::Game(int screenWidth, int screenHeight) {
     camera.zoom = 1.0f;
 }
 
+void DrawGrid2D(int slices, int spacing) {
+    int size = slices * spacing;
+    for (int i = 0; i <= size; i += spacing) {
+        DrawLine(i, 0, i, size, LIGHTGRAY); // Dọc
+        DrawLine(0, i, size, i, LIGHTGRAY); // Ngang
+    }
+}
+
 void Game::HandleInput() {
     if (IsKeyDown(KEY_A)) MoveLeft();
     if (IsKeyDown(KEY_D)) MoveRight();
@@ -32,18 +40,9 @@ void Game::MoveDown() {
 }
 
 void Game::Draw() {
-    int mapSize = 2000;
-    int spacing = 50;
     BeginMode2D(camera);
         // Vẽ lưới
-        for(int x = 0 ; x <= mapSize ; x += spacing){
-            DrawLine(x, 0, x, mapSize, LIGHTGRAY); // Trục x
-        }
-
-        for(int y = 0 ; y <= mapSize ; y += spacing){
-            DrawLine(0, y, y, mapSize, LIGHTGRAY); // Trục y
-        }
-        
+        DrawGrid2D(100, 50);
         // Vẽ nhân vật
         player.Draw();
     EndMode2D();
