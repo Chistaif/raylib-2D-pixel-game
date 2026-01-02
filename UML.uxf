@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>190</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+
+--
+- HandleInput(): void
+- MoveLeft(): void
+- MoveRight(): void
+- MoveUp(): void
+- MoveDown(): void
+- MoveUpLeft(): void
+- MoveUpRight(): void
+- MoveDownLeft(): void
+- MoveDownRight(): void
+- Sprint():</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>190</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+- AttackPoint: int
+- HealthPoint: int
+- DefendPoint: int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
