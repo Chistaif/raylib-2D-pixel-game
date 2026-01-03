@@ -4,16 +4,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>190</y>
-      <w>210</w>
-      <h>230</h>
+      <x>380</x>
+      <y>90</y>
+      <w>200</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>Game
 --
+- camera: Camera2D
+- player: Player
 
---
-- HandleInput(): void
 - MoveLeft(): void
 - MoveRight(): void
 - MoveUp(): void
@@ -22,24 +22,46 @@
 - MoveUpRight(): void
 - MoveDownLeft(): void
 - MoveDownRight(): void
-- Sprint():</panel_attributes>
+- Sprint(): void
+- Attack(): void
+--
++ HandleInput(): void
++ Update(): void
++ Draw(): void
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>710</x>
-      <y>190</y>
-      <w>210</w>
-      <h>190</h>
+      <y>160</y>
+      <w>300</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Player
 --
 - AttackPoint: int
 - HealthPoint: int
 - DefendPoint: int
+- Speed: float
 --
++ position: Vector2D
++ Draw(): void
++ Move(float directionX, float directionY): void
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>220</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

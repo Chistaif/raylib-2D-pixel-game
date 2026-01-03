@@ -1,24 +1,25 @@
+#include <vector>
 #include "raylib.h"
-#include "entities/Player.h"
+#include "raymath.h"
+#include "entities/Entity.h"
+#include "entities/Player/Player.h"
+#include "entities/Enemy/Enemy.h"
+#include "entities/Enemy/Dummy/Dummy.h"
+
+#include <string>
 
 class Game {
 private:
     Camera2D camera;
+    Vector2 lastDirec; // Nhớ hướng di chuyển cuối cùng
 
-    void MoveLeft();
-    void MoveRight();
-    void MoveUp();
-    void MoveDown();
-    // void MoveUpLeft();
-    // void MoveUpRight();
-    // void MoveDownLeft();
-    // void MoveDownRight();
-    // void Sprint();
+    Player* player;
+    std::vector<Enemy*> enemies;
 
-    public:
+    void Attack();
+public:
     Game(int screenWidth, int screenHeight);
-    ~Game() = default;
-    Player player;
+    ~Game(); 
     
     void HandleInput();
     void Update();
