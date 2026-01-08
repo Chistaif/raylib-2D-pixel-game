@@ -3,15 +3,32 @@
 Player::Player() : Entity(10.0f, 10.0f, 250.0f, 200.0f) {
     ManaPoint = 100.0f;
     Stamina = 100.0f;
-
     currMana = ManaPoint;
     currStamina = Stamina;
-
     position = { 64.0f, 64.0f };
+
+    // --- LOAD TEXTURE ---
+    texture = LoadTexture("assets/graphics/character/Knight_Walking_16Frame.png");
+
+    // --- TÍNH TOÁN FRAME ---
+    // Ảnh có 4 cột và 4 hàng.
+    // frameRec.width = Tổng chiều rộng / 4
+    // frameRec.height = Tổng chiều cao / 4
+    frameRec = {0.0f, 0.0f, (float)texture.width / 4, (float)texture.height / 4};
+
+    currFrame = 0;
+    frameCounter = 0.0f;
+}
+
+Player::~Player(){
+    UnloadTexture(texture);
 }
 
 void Player::Draw() {
-    DrawRectangleV(position, { 32, 32 }, RED);
+    DrawTextureRec(texture, frameRec, position, WHITE);
+
+    // Hitbox
+    // DrawRectangleLines(position.x, position.y, frameRec.width, frameRec.height, GREEN);
 }
 
 void Player::DrawUI(int x, int y) {
@@ -53,6 +70,30 @@ void Player::DrawUI(int x, int y) {
 
 void Player::Move(Vector2 direc, float currSpeed) {
     Entity::Move(direc, currSpeed);
+
+    bool isMoving = (direc.x != 0 || direc.y != 0);
+    if (isMoving) {
+        // A. XÁC ĐỊNH HÀNG (ROW) DỰA VÀO HƯỚNG
+        // 0=Xuống, 1=Phải, 2=Trái, 3=Lên
+        if (direc.y > 0) frameRec.y = 0 * frameRec.height; // Hàng 1
+        else if (direc.y < 0) frameRec.y = 3 * frameRec.height; // Hàng 4
+
+        if (direc.x > 0) frameRec.y = 2 * frameRec.height;      // Hàng 2
+        else if (direc.x < 0) frameRec.y = 1 * frameRec.height; // Hàng 3
+
+        frameCounter += GetFrameTime();
+        if (frameCounter >= 0.15f) { // 0.15 giây đổi hình 1 lần
+            frameCounter = 0.0f;
+            currFrame++;
+
+            if (currFrame > 3) currFrame = 0; // Quay về khung đầu tiên nếu đã đi hết 4 frame
+            frameRec.x = (float)currFrame * frameRec.width; // Dịch khung hình sang phải
+        }
+    }
+    else { // Trường hợp đứng yên
+        currFrame = 0;
+        frameRec.x = 0;
+    }
 }
 
 void Player::UpdateHealth(int point) {

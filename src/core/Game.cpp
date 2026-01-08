@@ -5,12 +5,12 @@ Game::Game(int screenWidth, int screenHeight) {
     enemies.push_back(new Dummy(0, 0, player));
 
     camera = {0};
-    camera.target = (Vector2){player->position.x + 20.0f, player->position.y + 20.0f};
+    camera.target = (Vector2){player->position.x + 16.0f, player->position.y + 16.0f};
     camera.offset = (Vector2){screenWidth/2.0f, screenHeight/2.0f};
     camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
+    camera.zoom = 2.5f;
 
-    lastDirec = {1.0f, 0.0f}; // Mặc định là nhìn sang phải
+    lastDirec = {0.0f, 1.0f}; // Mặc định là nhìn xuống
 }
 
 Game::~Game(){
@@ -31,6 +31,27 @@ void DrawGrid2D(int slices, int spacing) {
 
     DrawLine(0, size, 0, -size, BLACK);
     DrawLine(-size, 0, size, 0, BLACK);
+}
+
+void Game::UpdateCameraCenter(){
+    // Mục tiêu: Camera luôn nhìn vào giữa tâm nhân vật (cộng thêm offset để căn giữa sprite 32x32)
+    Vector2 targetPos = {player->position.x + 16.0f, player->position.y + 16.0f};
+
+    camera.target.x += (targetPos.x - camera.target.x) * 0.1f;
+    camera.target.y += (targetPos.y - camera.target.y) * 0.1f;
+
+    float wheel = GetMouseWheelMove();
+
+    if (wheel != 0) {
+        const float zoomIncrement = 0.125f;
+
+        camera.zoom += (zoomIncrement * wheel);
+
+        if (camera.zoom < 0.5f) camera.zoom = 0.5f;
+        if (camera.zoom > 5.0f) camera.zoom = 5.0f;
+        
+        TraceLog(LOG_INFO, "Current Zoom: %f", camera.zoom);
+    }
 }
 
 void Game::HandleInput() {
@@ -86,6 +107,6 @@ void Game::Update() {
     for (Enemy* e : enemies) {
         e->AIUpdate(dt);
     }
-    // Cập nhật camera theo nhân vật
-    camera.target = (Vector2){player->position.x + 20, player->position.y + 20};
+
+    UpdateCameraCenter();
 }

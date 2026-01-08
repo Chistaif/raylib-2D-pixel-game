@@ -7,9 +7,15 @@ class Player : public Entity {
 private:
     float ManaPoint;
     float Stamina;
+
+    Texture2D texture; // Chứa ảnh player
+    Rectangle frameRec; // Khung cắt ảnh (Cửa sổ nhìn)
+    int currFrame; // Kiểm soát frame (Cột thứ 1, 2, 4, ...)
+    float frameCounter; // Bộ đếm thời gian
+
 public:
     Player();
-    ~Player() = default;
+    ~Player();
 
     float currMana;
     float currStamina;

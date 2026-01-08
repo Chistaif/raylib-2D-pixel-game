@@ -17,6 +17,7 @@ private:
     std::vector<Enemy*> enemies;
 
     void Attack();
+    void UpdateCameraCenter();
 public:
     Game(int screenWidth, int screenHeight);
     ~Game(); 
