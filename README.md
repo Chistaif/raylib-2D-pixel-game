@@ -1,20 +1,35 @@
-# raylib-2D-pixel-game
+# MyRPG_Game
+
+Dự án game nhập vai 2D (RPG) sử dụng C++ và thư viện Raylib.
+
+## Cấu Trúc Thư Mục
+
 ```text
 MyRPG_Game/
-├── .gitignore             # File cấu hình Git (bỏ qua folder build)
-├── CMakeLists.txt         # File cấu hình build chính
-├── assets/                # Chứa toàn bộ tài nguyên game
-│   ├── graphics/          # Sprites, tilesets, UI images
-│   │   ├── characters/
-│   │   └── tilesets/
-│   ├── sounds/            # Âm thanh (sfx) và Nhạc nền (bgm)
-│   ├── fonts/             # Font chữ pixel
-│   └── maps/              # File bản đồ (xuất ra từ Tiled/LDtk)
+├── .gitignore             # Cấu hình file/thư mục Git cần bỏ qua
+├── CMakeLists.txt         # Cấu hình build dự án với CMake
+├── UML.uxf                # Sơ đồ thiết kế hệ thống (UML)
+├── assets/                # Tài nguyên game (Ảnh, Nhạc, Font...)
 │
-└── src/                   # Mã nguồn C++
-    ├── main.cpp           # Điểm khởi chạy (Entry point)
-    ├── core/              # Các class nền tảng (Window, Camera, Config)
-    ├── entities/          # Các đối tượng game (Player, Enemy, NPC)
-    ├── scenes/            # Quản lý màn chơi (Menu, Gameplay, GameOver)
-    └── utils/             # Các hàm tiện ích (Toán học, hằng số)
-```
+└── src/                   # Mã nguồn chính (Source Code)
+    ├── main.cpp           # Điểm khởi chạy chương trình (Entry point)
+    │
+    ├── core/              # Các thành phần cốt lõi quản lý Game
+    │   ├── Game.h         # Quản lý vòng lặp game, input, update, draw
+    │   └── Game.cpp
+    │
+    └── entities/          # Hệ thống thực thể (Entities System)
+        ├── Entity.h       # Class cha cơ sở (Base class) cho mọi vật thể
+        ├── Entity.cpp
+        │
+        ├── Player/        # Module nhân vật chính
+        │   ├── Player.h
+        │   └── Player.cpp
+        │
+        └── Enemy/         # Module kẻ địch
+            ├── Enemy.h    # Class cơ sở cho quái vật (AI, Thanh máu...)
+            ├── Enemy.cpp
+            │
+            └── Dummy/     # Quái vật bù nhìn (Dùng để test)
+                ├── Dummy.h
+                └── Dummy.cpp
