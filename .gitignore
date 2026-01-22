@@ -11,7 +11,6 @@ cmake-build-*/
 *.dll
 *.so
 *.dylib
-*.a
 *.lib
 
 # --- 3. File tạm của C++ (Object files) ---
