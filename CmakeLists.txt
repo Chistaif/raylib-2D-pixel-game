@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Tên dự án
+project(Seed_of_sins)
+
+# Cấu hình C++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+# --- 1. ĐỊNH NGHĨA ĐƯỜNG DẪN ---
+# Đường dẫn đến thư mục chứa Raylib
+set(RAYLIB_PATH "${CMAKE_SOURCE_DIR}/lib/raylib")
+# Báo CMake nơi tìm Header (.h)
+include_directories("${CMAKE_SOURCE_DIR}/src") #include source code
+include_directories("${RAYLIB_PATH}/include") #include file header raylib
+# Báo CMake nơi tìm Library (.a)
+link_directories("${RAYLIB_PATH}/lib") #link thư viện raylib
+
+# --- 2. TÌM SOURCE CODE ---
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "main.cpp")
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# --- 3. LINK THƯ VIỆN CHUẨN CHO MINGW ---
+target_link_libraries("${PROJECT_NAME}" PRIVATE raylib opengl32 gdi32 winmm user32 shell32)
+
+# --- 4. COPY TÀI NGUYÊN ---
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_SOURCE_DIR}/resources"
+    "$<TARGET_FILE_DIR:${PROJECT_NAME}>/resources"
+)

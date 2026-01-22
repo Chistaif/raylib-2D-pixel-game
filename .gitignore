@@ -1,0 +1,49 @@
+# --- 1. Thư mục Build (QUAN TRỌNG NHẤT) ---
+# Đây là nơi chứa file rác khi biên dịch, nặng và vô dụng với máy khác
+build/
+bin/
+out/
+cmake-build-*/
+
+# --- 2. File thực thi và thư viện biên dịch ---
+# Không up file .exe vì máy khác sẽ tự build ra file của riêng họ
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# --- 3. File tạm của C++ (Object files) ---
+*.o
+*.obj
+
+# --- 4. File rác của CMake ---
+CMakeCache.txt
+CMakeFiles/
+*.cmake
+install_manifest.txt
+
+# --- 5. Cấu hình Editor/IDE (Riêng tư của từng máy) ---
+# VS Code
+.vscode/
+
+# Visual Studio (Nếu dùng MSVC)
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+
+# CLion
+.idea/
+
+# --- 6. File rác hệ điều hành ---
+.DS_Store
+Thumbs.db
+
+# --- 7. (Tùy chọn) File thiết kế gốc ---
+# Nếu bạn vẽ pixel art bằng Photoshop/Aseprite nhưng chỉ muốn up file .png vào game
+*.uxf
+# *.psd
+# *.aseprite
