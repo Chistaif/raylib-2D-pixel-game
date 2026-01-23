@@ -1,18 +1,21 @@
 #include "raylib.h"
 
 class Entity {
-private:
+protected:
     float maxHP;
-    float maxAT;
-    float maxSP;
+    float maxATK;
+    float maxDEF;
+    float maxSPD;
 
-    
+    float currentHP;
+
+    Vector2 position;
 public:
-    Entity();
-    ~Entity();
+    Entity(float maxHP, float maxATK, float maxDEF,float maxSP);
+    virtual ~Entity();
 
-    void Update();
-    void Draw();
+    virtual void Update() = 0;
+    virtual void Draw();
 
-    void Move();
+    void Move(Vector2 direction, float dt);
 };
